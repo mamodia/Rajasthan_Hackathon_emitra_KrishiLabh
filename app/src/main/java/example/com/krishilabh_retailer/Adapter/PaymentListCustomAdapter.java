@@ -68,7 +68,11 @@ public class PaymentListCustomAdapter extends RecyclerView.Adapter<PaymentListCu
                             status=(HashMap<String,Object>)dataSnapshot.getValue();
                             Log.e("Status",status.toString());
                             String s=(String)status.get("status");
-                            if(s.equals("Approved")){
+                            Intent intent=new Intent(context, PaymentActivity2.class);
+                            intent.putExtra("FPIName",paymentDetails.get(position).getFirm());
+                            intent.putExtra("TotalCost",paymentDetails.get(position).getAmount());
+                            context.startActivity(intent);
+                            /*if(s.equals("Approved")){
                                 Intent intent=new Intent(context, PaymentActivity2.class);
                                 intent.putExtra("FPIName",paymentDetails.get(position).getFirm());
                                 intent.putExtra("TotalCost",paymentDetails.get(position).getAmount());
@@ -84,7 +88,7 @@ public class PaymentListCustomAdapter extends RecyclerView.Adapter<PaymentListCu
 
                             }else if(s.equals("PaymentDone")){
                                 holder.ApprovedLay.setVisibility(View.VISIBLE);
-                            }
+                            }*/
 
 
                         }

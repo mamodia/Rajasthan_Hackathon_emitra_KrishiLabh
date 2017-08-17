@@ -1,6 +1,7 @@
 package example.com.krishilabh_retailer;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -50,7 +51,10 @@ public class PaymentActivity2 extends Activity implements PaymentResultListener 
          */
         final Activity activity = this;
 
-        final Checkout co = new Checkout();
+        Intent intent=new Intent(getApplicationContext(),Web.class);
+        startActivity(intent);
+
+        /*final Checkout co = new Checkout();
 
         try {
             JSONObject options = new JSONObject();
@@ -72,7 +76,7 @@ public class PaymentActivity2 extends Activity implements PaymentResultListener 
             Toast.makeText(activity, "Error in payment: " + e.getMessage(), Toast.LENGTH_SHORT)
                     .show();
             e.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -84,11 +88,11 @@ public class PaymentActivity2 extends Activity implements PaymentResultListener 
     @Override
     public void onPaymentSuccess(String razorpayPaymentID) {
         try {
-            Toast.makeText(this, "Payment Successful: " + razorpayPaymentID, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Payment Successful: " + razorpayPaymentID, Toast.LENGTH_SHORT).show();
             SharedPreferences settings= PreferenceManager.getDefaultSharedPreferences(this);
-            DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Notification")
+            /*DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Notification")
                     .child(FPIName).child(settings.getString("company",null)).child("status");
-            reference.setValue("PaymentDone");
+            reference.setValue("PaymentDone");*/
 
         } catch (Exception e) {
             Log.e(TAG, "Exception in onPaymentSuccess", e);
@@ -104,7 +108,7 @@ public class PaymentActivity2 extends Activity implements PaymentResultListener 
     @Override
     public void onPaymentError(int code, String response) {
         try {
-            Toast.makeText(this, "Payment failed: " + code + " " + response, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Payment failed: " + code + " " + response, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Log.e(TAG, "Exception in onPaymentError", e);
         }
